@@ -1,0 +1,16 @@
+# Local .terraform directories
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+
+# Ignore override files as they are usually used to override resources locally and so
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+hello.zip
+response.json

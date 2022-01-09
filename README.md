@@ -14,7 +14,11 @@ make deploy
 
 ### Call the API:
 ```bash
-curl "$(terraform output -raw base_url)/hello"
+curl -H "Content-Type: application/json" \
+  -H "Authorization: Bearer [ACCESS_TOKEN]" \
+  -X GET \
+  -i \
+  "$(terraform output -raw base_url)/hello"
 ```
 
 ### Tear down

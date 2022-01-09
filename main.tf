@@ -142,3 +142,14 @@ resource "aws_lambda_permission" "hello_api_gateway" {
   source_arn = "${aws_apigatewayv2_api.hello_lambda.execution_arn}/*/*"
 }
 
+resource "aws_apigatewayv2_authorizer" "api_geteway_autorizer" {
+  api_id           = aws_apigatewayv2_api.hello_lambda.id
+  authorizer_type  = "JWT"
+  identity_sources = ["$request.header.Authorization"]
+  name             = "hello-api-authorizer"
+
+  jwt_configuration {
+    audience = [var.authorizer_audience]
+    issuer   = var.authorizer_issuer
+  }
+}

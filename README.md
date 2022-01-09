@@ -1,6 +1,6 @@
 # 🪐 Terraform AWS Lambda starter with API Gateway
 
-Created this project based on the [HashiCorp guidance](https://learn.hashicorp.com/tutorials/terraform/lambda-api-gateway?in=terraform/aws).
+Started this project based on the [HashiCorp guidance](https://learn.hashicorp.com/tutorials/terraform/lambda-api-gateway?in=terraform/aws).
 
 ## Initialization
 ```bash

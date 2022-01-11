@@ -14,3 +14,6 @@ override.tf.json
 terraform.rc
 hello.zip
 response.json
+
+# Script to generate API key
+set_api_key.sh

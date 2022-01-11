@@ -14,8 +14,12 @@ make deploy
 
 ### Call the API:
 ```bash
+make set-api-key
+```
+
+```bash
 curl -H "Content-Type: application/json" \
-  -H "Authorization: Bearer [ACCESS_TOKEN]" \
+  -H "Authorization: Bearer $HELLO_API_KEY" \
   -X GET \
   -i \
   "$(terraform output -raw base_url)/hello"

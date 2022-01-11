@@ -123,8 +123,13 @@ resource "aws_apigatewayv2_integration" "hello_lambda" {
 resource "aws_apigatewayv2_route" "hello_lambda" {
   api_id = aws_apigatewayv2_api.hello_lambda.id
 
-  route_key = "GET /hello"
-  target    = "integrations/${aws_apigatewayv2_integration.hello_lambda.id}"
+  route_key          = "GET /hello"
+  target             = "integrations/${aws_apigatewayv2_integration.hello_lambda.id}"
+  authorizer_id      = aws_apigatewayv2_authorizer.api_geteway_autorizer.id
+  authorization_type = "JWT"
+  depends_on = [
+    aws_apigatewayv2_authorizer.api_geteway_autorizer
+  ]
 }
 
 resource "aws_cloudwatch_log_group" "hello_api_gateway" {

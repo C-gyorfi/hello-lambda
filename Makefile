@@ -10,6 +10,9 @@ invoke:
 	aws lambda invoke --function-name=${FUNCTION_NAME} response.json
 
 destroy:
-	terraform destroy 
+	terraform destroy
 
-.PHONY: init deploy invoke destroy
+set-api-key:
+	./set_api_key.sh
+
+.PHONY: init deploy invoke destroy set-api-key

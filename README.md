@@ -14,7 +14,7 @@ make deploy
 
 ### Call the API:
 ```bash
-make set-api-key
+export HELLO_API_KEY=$(bash ./set_api_key.sh)
 ```
 
 ```bash

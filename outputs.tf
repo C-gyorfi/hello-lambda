@@ -4,9 +4,7 @@ output "lambda_bucket_name" {
 }
 
 output "function_name" {
-  description = "My lambda function name"
-
-  value = aws_lambda_function.hello_lambda.function_name
+  value = module.lambda.function_name
 }
 
 output "base_url" {

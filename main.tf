@@ -40,52 +40,17 @@ resource "aws_s3_bucket_object" "lambda_hello" {
   etag = filemd5(data.archive_file.lambda_hello.output_path)
 }
 
-resource "aws_lambda_function" "hello_lambda" {
-  function_name = "Hello"
-
-  s3_bucket = aws_s3_bucket.lambda_bucket.id
-  s3_key    = aws_s3_bucket_object.lambda_hello.key
-
-  runtime = "python3.8"
-  handler = "index.lambda_handler"
-
+module "lambda" {
+  source           = "./modules/lambda"
+  s3_bucket        = aws_s3_bucket.lambda_bucket.id
+  s3_key           = aws_s3_bucket_object.lambda_hello.key
   source_code_hash = data.archive_file.lambda_hello.output_base64sha256
-
-  role = aws_iam_role.lambda_exec.arn
-}
-
-resource "aws_cloudwatch_log_group" "hello_world" {
-  name = "/aws/lambda/${aws_lambda_function.hello_lambda.function_name}"
-
-  retention_in_days = 30
-}
-
-resource "aws_iam_role" "lambda_exec" {
-  name = "serverless_lambda"
-
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [{
-      Action = "sts:AssumeRole"
-      Effect = "Allow"
-      Sid    = ""
-      Principal = {
-        Service = "lambda.amazonaws.com"
-      }
-      }
-    ]
-  })
-}
-
-resource "aws_iam_role_policy_attachment" "lambda_policy" {
-  role       = aws_iam_role.lambda_exec.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
 module "api_gateway" {
   source            = "./modules/api_gateway"
-  integration_uri   = aws_lambda_function.hello_lambda.invoke_arn
-  function_name     = aws_lambda_function.hello_lambda.function_name
+  integration_uri   = module.lambda.invoke_arn
+  function_name     = module.lambda.function_name
   audience          = [var.authorizer_audience]
   authorizer_issuer = var.authorizer_issuer
 }

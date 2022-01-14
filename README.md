@@ -2,17 +2,17 @@
 
 Started this project based on the [HashiCorp guidance](https://learn.hashicorp.com/tutorials/terraform/lambda-api-gateway?in=terraform/aws).
 
-## Initialization
+### Initialization 📦
 ```bash
 make init
 ```
 
-### Deploy
+### Deploy 🚀
 ```
 make deploy
 ```
 
-### Call the API:
+### Call the API 🔌 
 ```bash
 export HELLO_API_KEY=$(bash ./set_api_key.sh)
 ```
@@ -25,7 +25,12 @@ curl -H "Content-Type: application/json" \
   "$(terraform output -raw base_url)/hello"
 ```
 
-### Tear down
+### Run tests 🧪 
+```bash
+make test
+```
+
+### Tear down 💥 
 ```bash
 make destroy
 ```

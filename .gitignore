@@ -17,3 +17,6 @@ response.json
 
 # Script to generate API key
 set_api_key.sh
+
+# python cache
+*.pyc

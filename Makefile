@@ -1,7 +1,7 @@
 FUNCTION_NAME=$(terraform output -raw function_name)
 
 init:
-	terraform init
+	terraform init && poetry install
 
 deploy:
 	terraform apply 
@@ -12,4 +12,7 @@ invoke:
 destroy:
 	terraform destroy
 
-.PHONY: init deploy invoke destroy
+test:
+	poetry run pytest
+
+.PHONY: init deploy invoke destroy test

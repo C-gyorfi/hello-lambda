@@ -1,0 +1,2 @@
+authorizer_issuer   = "[insert authorizer issuer e.g:https://***.auth0.com/]"
+authorizer_audience = "[insert authorizer audience]"
